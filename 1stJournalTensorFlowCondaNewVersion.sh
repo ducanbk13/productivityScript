@@ -27,12 +27,12 @@ installEnvironment(){
     # Name of the conda environment
     # and Python version
     # ------------------------
-    ENV_NAME="tensorflow2.6"
-    PYTHON_VERSION="3.9.13"
-    CUDATOOLKIT_VERSION="11.2"
-    CUDNN_VERSION="8.1"
-    TENSORFLOW_VERSION="2.6.0"
-    KERAS_VERSION="2.6.0"
+    ENV_NAME="tensorflow2.16.1"
+    PYTHON_VERSION="3.11"
+    # CUDATOOLKIT_VERSION="11.2"
+    # CUDNN_VERSION="8.1"
+    # TENSORFLOW_VERSION="2.6.0"
+    # KERAS_VERSION="2.6.0"
 
 
     # Check if conda is installed
@@ -56,12 +56,12 @@ installEnvironment(){
     # source "$(conda info --base)/etc/profile.d/conda.sh"
     conda activate $ENV_NAME || error_exit "Failed to activate conda environment"
 
-    # ------------------------
-    # Install cudatoolkit and 
-    # cudnn
-    # ------------------------
-    echo "Installing cudatoolkit version '$CUDATOOLKIT_VERSION' and cudnn version '$CUDNN_VERSION'..."
-    conda install -y -c conda-forge cudatoolkit=$CUDATOOLKIT_VERSION cudnn=$CUDNN_VERSION
+    # # ------------------------
+    # # Install cudatoolkit and 
+    # # cudnn
+    # # ------------------------
+    # echo "Installing cudatoolkit version '$CUDATOOLKIT_VERSION' and cudnn version '$CUDNN_VERSION'..."
+    # conda install -y -c conda-forge cudatoolkit=$CUDATOOLKIT_VERSION cudnn=$CUDNN_VERSION
 
     # ------------------------
     # Configure the system paths. 
@@ -76,9 +76,10 @@ installEnvironment(){
     # ------------------------
     echo "Upgrade pip and install tensorflow version '$TENSORFLOW_VERSION'..."
     pip install --upgrade pip
-    pip install tensorflow==$TENSORFLOW_VERSION || error_exit "Failed to install TensorFlow"
-    pip install keras==$KERAS_VERSION || error_exit "Failed to install keras"
+    pip install tensorflow[and-cuda] || error_exit "Failed to install TensorFlow"
+    # pip install keras==$KERAS_VERSION || error_exit "Failed to install keras"
 
+    
 
     # ------------------------
     # Install other packages
@@ -86,6 +87,8 @@ installEnvironment(){
     conda install -y conda-forge::matplotlib
     conda install -y anaconda::pandas
     conda install -y conda-forge::joblib
+    conda install -y pytables
+
 
 
 
