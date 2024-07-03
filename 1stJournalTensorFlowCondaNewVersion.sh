@@ -27,8 +27,8 @@ installEnvironment(){
     # Name of the conda environment
     # and Python version
     # ------------------------
-    ENV_NAME="tensorflow2.10.0"
-    PYTHON_VERSION="3.10"
+    ENV_NAME="tensorflowStable"
+    PYTHON_VERSION="3.10.12"
     CUDATOOLKIT_VERSION="11.2.0"
     CUDNN_VERSION="8.1.0.77"
     TENSORFLOW_VERSION="2.10.0"
@@ -92,6 +92,9 @@ installEnvironment(){
     conda install -y anaconda::pandas
     conda install -y conda-forge::joblib
     conda install -y pytables
+    conda install -y anaconda::seaborn
+    conda install -y anaconda::scipy
+
 
 
 }
