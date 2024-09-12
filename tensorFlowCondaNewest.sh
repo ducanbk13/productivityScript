@@ -27,12 +27,12 @@ installEnvironment(){
     # Name of the conda environment
     # and Python version
     # ------------------------
-    ENV_NAME="tensorflow2.10.0"
-    PYTHON_VERSION="3.10.12"
-    CUDATOOLKIT_VERSION="11.2.0"
-    CUDNN_VERSION="8.1.0.77"
-    TENSORFLOW_VERSION="2.10.0"
-    KERAS_VERSION="2.10.0"
+    ENV_NAME="tensorflowNewest"
+    PYTHON_VERSION="3.11"
+    # CUDATOOLKIT_VERSION="11.2.0"
+    # CUDNN_VERSION="8.1.0.77"
+    # TENSORFLOW_VERSION="2.10.0"
+    # KERAS_VERSION="2.10.0"
 
 
     # Check if conda is installed
@@ -57,44 +57,12 @@ installEnvironment(){
     conda activate $ENV_NAME || error_exit "Failed to activate conda environment"
 
     # ------------------------
-    # Install cudatoolkit and 
-    # cudnn
-    # ------------------------
-    echo "Installing cudatoolkit version '$CUDATOOLKIT_VERSION' and cudnn version '$CUDNN_VERSION'..."
-    # conda install -y -c conda-forge cudatoolkit=$CUDATOOLKIT_VERSION cudnn=$CUDNN_VERSION || error_exit "Failed to install CUDA and CUDNN"
-    conda install -y conda-forge::cudatoolkit=$CUDATOOLKIT_VERSION || error_exit "Failed to install CUDA"
-    conda install -y conda-forge::cudnn=$CUDNN_VERSION  || error_exit "Failed to install cuda and CuDNN"
-    
-
-
-    # ------------------------
-    # Configure the system paths. 
-    # ------------------------
-    echo "Configure the system paths"
-    mkdir -p $CONDA_PREFIX/etc/conda/activate.d
-    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/' > $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-
-    # ------------------------
     # Upgrade pip and install
     # tensorflow
     # ------------------------
-    echo "Upgrade pip and install tensorflow version '$TENSORFLOW_VERSION'..."
+    echo "Upgrade pip and install tensorflow..."
     pip install --upgrade pip
-    pip install tensorflow==$TENSORFLOW_VERSION || error_exit "Failed to install TensorFlow"
-    # pip install keras==$KERAS_VERSION || error_exit "Failed to install keras"
-
-    
-
-    # ------------------------
-    # Install other packages
-    # ------------------------
-    # conda install -y conda-forge::matplotlib
-    # conda install -y anaconda::pandas
-    # conda install -y conda-forge::joblib
-    # conda install -y pytables
-    # conda install -y anaconda::seaborn
-    # conda install -y anaconda::scipy
-
+    pip install tensorflow[and-cuda]
 
 
 }

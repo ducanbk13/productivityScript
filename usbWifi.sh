@@ -18,16 +18,29 @@ installEnvironment(){
         exit 1
     }
 
+    read -p "You want to install which source of driver rtl8852bu (type '1') or rtl8852bu (morrownr version,recommemed) (type '0'):" taskState
 
-    sudo apt-get update
-    sudo apt install -y build-essential dkms git iw
-    mkdir -p ~/src
-    cd ~/src
-    echo "Cloning the git file and install the wifi driver"
-    git clone https://github.com/morrownr/rtl8852bu.git
-    cd ~/src/rtl8852bu
-    sudo ./install-driver.sh
+    mkdir -p ~/Downloads/wifiDriver
+    cd ~/Downloads/wifiDriver
 
+    if [ $taskState = "0" ]; then 
+        sudo apt-get update
+        sudo apt install -y build-essential dkms git iw
+
+        echo "Cloning the git file and install the wifi driver"
+        git clone https://github.com/morrownr/rtl8852bu.git
+        cd ~/Downloads/wifiDriver/rtl8852bu
+        sudo ./install-driver.sh
+    
+    elif [ $taskState = "1" ]; then 
+        sudo apt-get update
+        sudo apt-get install make gcc linux-headers-$(uname -r) build-essential git
+        git clone https://github.com/lwfinger/rtl8852bu.git
+        cd rtl8852bu
+        make
+        sudo make install
+        
+    fi
 }
 
 
