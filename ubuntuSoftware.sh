@@ -34,17 +34,23 @@ installEnvironment(){
 
 
     # -------------------------
-    # Install wifi driver
+    # Install firefox
     # -------------------------
-    echo "Installing the external wifi driver ..."
-    sudo apt-get update
-    sudo apt install -y build-essential dkms git iw
-    mkdir -p ~/src
-    cd ~/src
-    echo "Cloning the git file and install the wifi driver"
-    git clone https://github.com/morrownr/rtl8852bu.git
-    cd ~/src/rtl8852bu
-    sudo ./install-driver.sh
+    sudo snap remove firefox
+    sudo install -d -m 0755 /etc/apt/keyrings
+    wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+    echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null    
+    echo '
+    Package: *
+    Pin: origin packages.mozilla.org
+    Pin-Priority: 1000
+
+    Package: firefox*
+    Pin: release o=Ubuntu
+    Pin-Priority: -1' | sudo tee /etc/apt/preferences.d/mozilla    
+    sudo apt update && sudo apt remove firefox
+    sudo apt install -y firefox
+
 
     # -------------------------
     # Install chrome
@@ -52,6 +58,13 @@ installEnvironment(){
     echo "Installing google chome ..."
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+    # -------------------------
+    # Install audio switcher
+    # -------------------------
+    sudo apt-add-repository ppa:yktooo/ppa
+    sudo apt-get update
+    sudo apt-get install -y indicator-sound-switcher
 
     # -------------------------
     # Install solaar
@@ -80,6 +93,22 @@ installEnvironment(){
     sudo add-apt-repository ppa:danielrichter2007/grub-customizer
     sudo apt update
     sudo apt install -y grub-customizer
+
+
+    # ------------------------
+    # Install drawIO
+    # ------------------------
+    wget https://github.com/jgraph/drawio-desktop/releases/download/v13.0.3/draw.io-amd64-13.0.3.deb
+    sudo dpkg -i draw.io-amd64-13.0.3.deb
+
+    # ------------------------
+    # Install GPU driver
+    # ------------------------
+    sudo add-apt-repository ppa:graphics-drivers/ppa && sudo apt update
+    sudo apt-get remove --purge '^nvidia-.*'
+    sudo apt install -y nvidia-driver-550
+
+
     
 
 }
