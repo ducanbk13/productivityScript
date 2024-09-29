@@ -36,20 +36,20 @@ installEnvironment(){
     # -------------------------
     # Install firefox
     # -------------------------
-    sudo snap remove firefox
-    sudo install -d -m 0755 /etc/apt/keyrings
-    wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
-    echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null    
-    echo '
-    Package: *
-    Pin: origin packages.mozilla.org
-    Pin-Priority: 1000
+    # sudo install -d -m 0755 /etc/apt/keyrings
+    # wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+    # echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null    
+    # echo '
+    # Package: *
+    # Pin: origin packages.mozilla.org
+    # Pin-Priority: 1000
 
-    Package: firefox*
-    Pin: release o=Ubuntu
-    Pin-Priority: -1' | sudo tee /etc/apt/preferences.d/mozilla    
-    sudo apt update && sudo apt remove firefox
-    sudo apt install -y firefox
+    # Package: firefox*
+    # Pin: release o=Ubuntu
+    # Pin-Priority: -1' | sudo tee /etc/apt/preferences.d/mozilla    
+    # sudo apt update && sudo apt remove firefox
+    # sudo snap remove firefox
+    # sudo apt install -y firefox
 
 
     # -------------------------
@@ -72,6 +72,12 @@ installEnvironment(){
     echo "Installing solaar ..."
     sudo apt install -y solaar
 
+    # -------------------------
+    # Install world clock and 
+    # tweaks
+    # -------------------------
+    sudo apt install gnome-clocks
+    sudo apt install gnome-tweaks
 
     # -------------------------
     # Install unikey
@@ -83,8 +89,8 @@ installEnvironment(){
     # -------------------------
     # Install vscode
     # -------------------------
-    echo "Installing vscode ..."
-    sudo snap install code --classic
+    # echo "Installing vscode ..."
+    # sudo snap install code --classic
 
     # -------------------------
     # Install grub=customizer
@@ -104,9 +110,9 @@ installEnvironment(){
     # ------------------------
     # Install GPU driver
     # ------------------------
-    sudo add-apt-repository ppa:graphics-drivers/ppa && sudo apt update
-    sudo apt-get remove --purge '^nvidia-.*'
-    sudo apt install -y nvidia-driver-550
+    # sudo add-apt-repository ppa:graphics-drivers/ppa && sudo apt update
+    # sudo apt-get remove --purge '^nvidia-.*'
+    # sudo apt install -y nvidia-driver-550
 
 
     
