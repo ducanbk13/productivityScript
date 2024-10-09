@@ -20,7 +20,6 @@ installEnvironment(){
         echo "$1" 1>&2
         echo "Press Enter to exit..."
         read
-        read
         exit 1
     }
 
@@ -28,7 +27,7 @@ installEnvironment(){
     # Name of the conda environment
     # and Python version
     # ------------------------
-    ENV_NAME="tensorflow2.10.0New"
+    ENV_NAME="tensorflow2.10.0"
     PYTHON_VERSION="3.10.12"
     CUDATOOLKIT_VERSION="11.2.0"
     CUDNN_VERSION="8.1.0.77"
@@ -41,17 +40,6 @@ installEnvironment(){
         error_exit "Conda is not installed. Please install Anaconda or Miniconda first."
     fi
 
-
-    # ------------------------
-    # Check if the environment exists
-    # ------------------------
-    if conda env list | grep -q "^$ENV_NAME"; then
-        echo "Environment '$ENV_NAME' exists. Removing..."
-        conda env remove --name "$ENV_NAME"
-        echo "Environment '$ENV_NAME' has been removed."
-    else
-        echo "Environment '$ENV_NAME' does not exist, creating a new one"
-    fi
 
     # ------------------------
     # Create a conda environment
@@ -68,19 +56,8 @@ installEnvironment(){
     # source "$(conda info --base)/etc/profile.d/conda.sh"
     conda activate $ENV_NAME || error_exit "Failed to activate conda environment"
 
+    # pip install numpy==1.21.6
 
-    # ------------------------
-    # Assign the version of numpy
-    # and pandas to avoid problems
-    pip install numpy==1.21.6
-    pip install pandas==1.5.2
-    pip install matplotlib==3.5.3
-    pip install joblib==1.4.2
-    pip install tables==3.8.0 --no-deps
-    pip install py-cpuinfo==6.0.0 Cython==0.29.26 blosc2==2.0.0 numexpr==2.8.0 
-    # pip install blosc2==2.0.0
-    # pip install Cython==0.29.26
-    # pip install py-cpuinfo==6.0.0
     # ------------------------
     # Install cudatoolkit and 
     # cudnn
