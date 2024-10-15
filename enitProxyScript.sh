@@ -11,7 +11,7 @@ aptProxy(){
     # aptEnitProxy="Acquire::http::Proxy "http://squid.local.enit.fr:3128";"
     
     # System
-    local bashFile='//home/ducan/.bashrc'
+    local bashFile='//home/duc/.bashrc'
     local enitProxyHttp='export http_proxy="http://squid.local.enit.fr:3128/"'
     local enitProxyHttps='export https_proxy="https://squid.local.enit.fr:3128/"'
     local enitProxyHTTPWget='export HTTP_PROXY="http://squid.local.enit.fr:3128/"'

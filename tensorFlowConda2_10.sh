@@ -28,7 +28,7 @@ installEnvironment(){
     # Name of the conda environment
     # and Python version
     # ------------------------
-    ENV_NAME="tensorflow2.10.0New"
+    ENV_NAME="tensorflow2.10.0"
     PYTHON_VERSION="3.10.12"
     CUDATOOLKIT_VERSION="11.2.0"
     CUDNN_VERSION="8.1.0.77"

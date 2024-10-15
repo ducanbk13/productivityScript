@@ -28,7 +28,7 @@ installEnvironment(){
     # and Python version
     # ------------------------
     ENV_NAME="tensorflowNewest"
-    PYTHON_VERSION="3.11"
+    PYTHON_VERSION="3.12"
     # CUDATOOLKIT_VERSION="11.2.0"
     # CUDNN_VERSION="8.1.0.77"
     # TENSORFLOW_VERSION="2.10.0"
