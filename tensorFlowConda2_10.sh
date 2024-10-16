@@ -78,6 +78,11 @@ installEnvironment(){
     pip install joblib==1.4.2
     pip install tables==3.8.0 --no-deps
     pip install py-cpuinfo==6.0.0 Cython==0.29.26 blosc2==2.0.0 numexpr==2.8.0 
+    pip install scipy==1.7.2
+    pip install scikit-learn==1.0.2
+    pip install prettytable==2.2.1
+    # pip install numba==0.55.2
+    # pip install umap-learn==0.4.6
     # pip install blosc2==2.0.0
     # pip install Cython==0.29.26
     # pip install py-cpuinfo==6.0.0
