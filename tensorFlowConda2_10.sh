@@ -91,6 +91,7 @@ installEnvironment(){
     pip install prettytable==2.2.0
     pip install plotly==5.2.1
     pip install nbformat==5.1.3
+    pip install tqdm==4.61.2
     # ------------------------
     # Install cudatoolkit and 
     # cudnn
