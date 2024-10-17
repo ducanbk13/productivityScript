@@ -79,11 +79,6 @@ installEnvironment(){
     pip install tables==3.8.0 --no-deps
     pip install py-cpuinfo==6.0.0 Cython==0.29.26 blosc2==2.0.0 numexpr==2.8.0 
     
-    # pip install blosc2==2.0.0
-    # pip install Cython==0.29.26
-    # pip install py-cpuinfo==6.0.0
-
-
     
     pip install scipy==1.7.2
     pip install wheel==0.37.1
@@ -92,6 +87,8 @@ installEnvironment(){
     pip install plotly==5.2.1
     pip install nbformat==5.1.3
     pip install tqdm==4.61.2
+    pip install numba==0.55.0
+    pip install pacmap==0.7.0
     # ------------------------
     # Install cudatoolkit and 
     # cudnn
