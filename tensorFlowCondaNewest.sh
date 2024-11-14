@@ -40,6 +40,16 @@ installEnvironment(){
         error_exit "Conda is not installed. Please install Anaconda or Miniconda first."
     fi
 
+    # ------------------------
+    # Check if the environment exists
+    # ------------------------
+    if conda env list | grep -q "^$ENV_NAME"; then
+        echo "Environment '$ENV_NAME' exists. Removing..."
+        conda env remove --name "$ENV_NAME"
+        echo "Environment '$ENV_NAME' has been removed."
+    else
+        echo "Environment '$ENV_NAME' does not exist, creating a new one"
+    fi
 
     # ------------------------
     # Create a conda environment
@@ -62,9 +72,19 @@ installEnvironment(){
     # ------------------------
     echo "Upgrade pip and install tensorflow..."
     pip install --upgrade pip
-    pip install tensorflow[and-cuda]
+    pip install tf-nightly[and-cuda]
+    # pip install tensorflow[and-cuda]
 
 
+    # ------------------------
+    # Install package 
+    # ------------------------
+    pip install joblib
+    pip install pandas
+    pip install tqdm
+    pip install matplotlib
+    pip install tkan
+    pip install tables
 }
 
 
