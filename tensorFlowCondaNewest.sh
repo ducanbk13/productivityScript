@@ -56,13 +56,30 @@ installEnvironment(){
     # source "$(conda info --base)/etc/profile.d/conda.sh"
     conda activate $ENV_NAME || error_exit "Failed to activate conda environment"
 
+    
+
+    
+    # pip install numpy
+    # pip install tkan
+
     # ------------------------
     # Upgrade pip and install
     # tensorflow
     # ------------------------
     echo "Upgrade pip and install tensorflow..."
     pip install --upgrade pip
-    pip install tensorflow[and-cuda]
+    # pip install tensorflow[and-cuda]
+    pip install tf-nightly[and-cuda]
+
+    pip install joblib
+    pip install tqdm
+    pip install pandas
+    pip install prettytable
+    pip install scikit-learn
+    pip install matplotlib
+    pip install tables
+
+
 
 
 }
