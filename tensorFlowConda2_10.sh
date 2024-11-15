@@ -28,7 +28,7 @@ installEnvironment(){
     # Name of the conda environment
     # and Python version
     # ------------------------
-    ENV_NAME="tensorflow2.10.0Crusher"
+    ENV_NAME="tensorflow2.10.0"
     PYTHON_VERSION="3.10.12"
     CUDATOOLKIT_VERSION="11.2.0"
     CUDNN_VERSION="8.1.0.77"
@@ -89,6 +89,7 @@ installEnvironment(){
     pip install tqdm==4.61.2
     pip install numba==0.55.0
     pip install pacmap==0.7.0
+    pip install openpyxl==3.0.7
     # ------------------------
     # Install cudatoolkit and 
     # cudnn
@@ -117,7 +118,7 @@ installEnvironment(){
     # pip install keras==$KERAS_VERSION || error_exit "Failed to install keras"
 
     
-
+    pip install tensorboard==2.10.0
     # ------------------------
     # Install other packages
     # ------------------------
