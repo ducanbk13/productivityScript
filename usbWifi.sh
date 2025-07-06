@@ -6,7 +6,7 @@ installEnvironment(){
     # ------------------------
     # Stop script if any fault happends
     # ------------------------
-    set -e
+    # set -e
 
     # ------------------------
     # https://github.com/morrownr/rtl8852bu/blob/1.19.3/README.md
@@ -28,8 +28,10 @@ installEnvironment(){
         sudo apt install -y build-essential dkms git iw
 
         echo "Cloning the git file and install the wifi driver"
-        git clone https://github.com/morrownr/rtl8852bu.git
-        cd ~/Downloads/wifiDriver/rtl8852bu
+        # git clone https://github.com/morrownr/rtl8852bu.git
+
+        git clone https://github.com/morrownr/rtl8852bu-20240418.git
+        cd ~/Downloads/wifiDriver/rtl8852bu-20240418
         sudo ./install-driver.sh
     
     elif [ $taskState = "1" ]; then 
