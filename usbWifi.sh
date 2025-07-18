@@ -18,6 +18,7 @@ installEnvironment(){
         exit 1
     }
 
+
     read -p "You want to install which source of driver rtl8852bu (type '1') or rtl8852bu (morrownr version,recommemed) (type '0'):" taskState
 
     mkdir -p ~/Downloads/wifiDriver
@@ -33,6 +34,10 @@ installEnvironment(){
         git clone https://github.com/morrownr/rtl8852bu-20240418.git
         cd ~/Downloads/wifiDriver/rtl8852bu-20240418
         sudo ./install-driver.sh
+
+        # If you want to uninstall the driver, you can run the following command:
+        # cd ~/Downloads/wifiDriver/rtl8852bu-20240418
+        # sudo ./uninstall-driver.sh 
     
     elif [ $taskState = "1" ]; then 
         sudo apt-get update
