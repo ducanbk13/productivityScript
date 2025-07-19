@@ -6,7 +6,7 @@ installEnvironment(){
     # ------------------------
     # Stop script if any fault happends
     # ------------------------
-    set -e
+    # set -e
 
     # ------------------------
     # Check the function is error
@@ -16,13 +16,13 @@ installEnvironment(){
     # Print that argument as an error message.
     # Redirect the message to standard error.
     # ------------------------
-    function error_exit {
-        echo "$1" 1>&2
-        echo "Press Enter to exit..."
-        read
-        read
-        exit 1
-    }
+    # function error_exit {
+    #     echo "$1" 1>&2
+    #     echo "Press Enter to exit..."
+    #     read
+    #     read
+    #     exit 1
+    # }
 
     # ------------------------
     # Name of the conda environment
@@ -69,6 +69,7 @@ installEnvironment(){
     conda activate $ENV_NAME || error_exit "Failed to activate conda environment"
 
 
+    sudo apt install build-essential        #build-essential includes g++, gcc, make, and other necessary tools for compiling Python packages with C++ extensions.
     # ------------------------
     # Assign the version of numpy
     # and pandas to avoid problems
