@@ -89,7 +89,7 @@ installEnvironment(){
     pip install nbformat==5.1.3
     pip install tqdm==4.61.2
     pip install numba==0.55.0
-    pip install pacmap==0.7.0
+    # pip install pacmap==0.7.0
     pip install openpyxl==3.0.7
     # ------------------------
     # Install cudatoolkit and 
@@ -116,7 +116,7 @@ installEnvironment(){
     echo "Upgrade pip and install tensorflow version '$TENSORFLOW_VERSION'..."
     pip install --upgrade pip
     pip install tensorflow==$TENSORFLOW_VERSION || error_exit "Failed to install TensorFlow"
-    # pip install keras==$KERAS_VERSION || error_exit "Failed to install keras"
+    pip install keras==$KERAS_VERSION || error_exit "Failed to install keras"
 
     
     pip install tensorboard==2.10.0

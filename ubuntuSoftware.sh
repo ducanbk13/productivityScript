@@ -35,7 +35,10 @@ installEnvironment(){
 
     # -------------------------
     # Install firefox
-    # -------------------------
+    # -------------------------\
+    sudo snap disable firefox
+    sudo snap remove --purge firefox
+    # sudo snap remove firefox
     sudo install -d -m 0755 /etc/apt/keyrings
     wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
     gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nThe key fingerprint matches ("$0").\n"; else print "\nVerification failed: the fingerprint ("$0") does not match the expected one.\n"}'
@@ -103,8 +106,9 @@ installEnvironment(){
     # ------------------------
     # Install drawIO
     # ------------------------
-    wget https://github.com/jgraph/drawio-desktop/releases/download/v13.0.3/draw.io-amd64-13.0.3.deb
-    sudo dpkg -i draw.io-amd64-13.0.3.deb
+    sudo snap install drawio
+    # wget https://github.com/jgraph/drawio-desktop/releases/download/v13.0.3/draw.io-amd64-13.0.3.deb
+    # sudo dpkg -i draw.io-amd64-13.0.3.deb
 
     # ------------------------
     # Install GPU driver

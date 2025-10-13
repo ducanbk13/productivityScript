@@ -86,7 +86,7 @@ installEnvironment(){
     echo "Installing cudatoolkit version '$CUDATOOLKIT_VERSION' and cudnn version '$CUDNN_VERSION'..."
     # conda install -y -c conda-forge cudatoolkit=$CUDATOOLKIT_VERSION cudnn=$CUDNN_VERSION || error_exit "Failed to install CUDA and CUDNN"
     conda install nvidia::cuda-toolkit=$CUDATOOLKIT_VERSION || error_exit "Failed to install CUDA"
-     conda install conda-forge::cudnn=$CUDNN_VERSION  || error_exit "Failed to install cuda and CuDNN"
+    conda install conda-forge::cudnn=$CUDNN_VERSION  || error_exit "Failed to install cuda and CuDNN"
     
     conda install nvidia::cuda-toolkit
 
