@@ -36,19 +36,19 @@ installEnvironment(){
     # -------------------------
     # Install firefox
     # -------------------------\
-    sudo snap disable firefox
-    sudo snap remove --purge firefox
-    # sudo snap remove firefox
-    sudo install -d -m 0755 /etc/apt/keyrings
-    wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
-    gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nThe key fingerprint matches ("$0").\n"; else print "\nVerification failed: the fingerprint ("$0") does not match the expected one.\n"}'
-    echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
-    echo '
-    Package: *
-    Pin: origin packages.mozilla.org
-    Pin-Priority: 1000
-    ' | sudo tee /etc/apt/preferences.d/mozilla
-    sudo apt-get update && sudo apt-get install firefox
+    # sudo snap disable firefox
+    # sudo snap remove --purge firefox
+    # # sudo snap remove firefox
+    # sudo install -d -m 0755 /etc/apt/keyrings
+    # wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+    # gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nThe key fingerprint matches ("$0").\n"; else print "\nVerification failed: the fingerprint ("$0") does not match the expected one.\n"}'
+    # echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+    # echo '
+    # Package: *
+    # Pin: origin packages.mozilla.org
+    # Pin-Priority: 1000
+    # ' | sudo tee /etc/apt/preferences.d/mozilla
+    # sudo apt-get update && sudo apt-get install firefox
 
 
     # -------------------------
@@ -59,11 +59,11 @@ installEnvironment(){
     sudo dpkg -i google-chrome-stable_current_amd64.deb
 
     # -------------------------
-    # Install audio switcher
+    # Install audio switcher (support the lower version of 24.04)
     # -------------------------
-    sudo apt-add-repository ppa:yktooo/ppa
-    sudo apt-get update
-    sudo apt-get install -y indicator-sound-switcher
+    # sudo apt-add-repository ppa:yktooo/ppa
+    # sudo apt-get update
+    # sudo apt-get install -y indicator-sound-switcher
 
     # -------------------------
     # Install solaar
@@ -117,9 +117,23 @@ installEnvironment(){
     # sudo apt-get remove --purge '^nvidia-.*'
     # sudo apt install -y nvidia-driver-550
 
+    # ------------------------
+    # Install Dropbox
+    # ------------------------
+    wget -O dropbox_2025.05.20_amd64.deb "https://www.dropbox.com/download?dl=packages%2Fubuntu%2Fdropbox_2025.05.20_amd64.deb"
+    sudo dpkg -i dropbox_2025.05.20_amd64.deb
 
-    
+    # ------------------------
+    # Install Only office
+    mkdir -p -m 700 ~/.gnupg
+    gpg --no-default-keyring --keyring gnupg-ring:/tmp/onlyoffice.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5
+    chmod 644 /tmp/onlyoffice.gpg
+    sudo chown root:root /tmp/onlyoffice.gpg
+    sudo mv /tmp/onlyoffice.gpg /usr/share/keyrings/onlyoffice.gpg
 
+    echo 'deb [signed-by=/usr/share/keyrings/onlyoffice.gpg] https://download.onlyoffice.com/repo/debian squeeze main' | sudo tee -a /etc/apt/sources.list.d/onlyoffice.list
+    sudo apt-get update
+    sudo apt-get install onlyoffice-desktopeditors
 }
 
 
