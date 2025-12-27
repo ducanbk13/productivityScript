@@ -56,7 +56,8 @@ installEnvironment(){
     # -------------------------
     echo "Installing google chome ..."
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo dpkg -i google-chrome-stable_current_amd64.deb
+    sudo apt install -y ./google-chrome-stable_current_amd64.deb
+    # sudo dpkg -i google-chrome-stable_current_amd64.deb
 
     # -------------------------
     # Install audio switcher (support the lower version of 24.04)
@@ -121,19 +122,52 @@ installEnvironment(){
     # Install Dropbox
     # ------------------------
     wget -O dropbox_2025.05.20_amd64.deb "https://www.dropbox.com/download?dl=packages%2Fubuntu%2Fdropbox_2025.05.20_amd64.deb"
-    sudo dpkg -i dropbox_2025.05.20_amd64.deb
+    sudo apt install -y dropbox_2025.05.20_amd64.deb
+    # sudo dpkg -i dropbox_2025.05.20_amd64.deb
 
     # ------------------------
     # Install Only office
-    mkdir -p -m 700 ~/.gnupg
-    gpg --no-default-keyring --keyring gnupg-ring:/tmp/onlyoffice.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5
-    chmod 644 /tmp/onlyoffice.gpg
-    sudo chown root:root /tmp/onlyoffice.gpg
-    sudo mv /tmp/onlyoffice.gpg /usr/share/keyrings/onlyoffice.gpg
+    # ------------------------
+    sudo snap install onlyoffice-desktopeditors
 
-    echo 'deb [signed-by=/usr/share/keyrings/onlyoffice.gpg] https://download.onlyoffice.com/repo/debian squeeze main' | sudo tee -a /etc/apt/sources.list.d/onlyoffice.list
+
+    # ------------------------
+    # Install thunderbird
+    # ------------------------
+    sudo apt install thunderbird
+
+
+
+    # ------------------------
+    # Install Docker
+    # ------------------------
+    # Add Docker's official GPG key:
     sudo apt-get update
-    sudo apt-get install onlyoffice-desktopeditors
+
+    # Install curl and ca-certificates
+    sudo apt-get install ca-certificates curl
+
+    # Create the keyrings folder for key (instead of trusted.gpg before), download the key and save to apt/keyrings under .asc, provide the right
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+    # Add the repository to Apt sources: echo write to stdout; "|" get the input on the left to use for
+    # the right, provide input to "tee" to write into docker.list apt. /dev/null stop the output to write to terminal
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+    
+    sudo systemctl status docker  #Check the status of installed docker
+    sudo systemctl start docker
+    # To avoid using sudo
+    sudo chmod 666 /var/run/docker.sock #add current user (recommened)
+    
 }
 
 

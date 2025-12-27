@@ -69,12 +69,12 @@ installPyEnv(){
     # ------------------------
     # Executing and updating
     # ------------------------
-    echo "✅ Pyenv is executing and updating ..."
+    echo "Pyenv is executing and updating ..."
     source ~/.bashrc        # load changes into the current shell
     # exec "$SHELL"
     pyenv update
 
-    echo -e "\033[32m✅ Pyenv updated!\033[0m"
+    echo -e "Pyenv updated!"
 
 }
 
