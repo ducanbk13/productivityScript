@@ -108,7 +108,7 @@ installEnvironment(){
     pip install pandas==1.5.2
     pip install matplotlib==3.5.3
     # pip install joblib==1.4.2
-    # pip install tables==3.8.0 --no-deps
+    pip install tables==3.8.0 --no-deps
     pip install py-cpuinfo==6.0.0 Cython==0.29.26 blosc2==2.0.0 numexpr==2.8.0 
     
     

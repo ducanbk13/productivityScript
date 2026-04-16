@@ -73,8 +73,8 @@ installEnvironment(){
     sudo apt install -y solaar
 
     # -------------------------
-    # Install world clock and 
-    # tweaks
+    # Install world clock, gnome
+    # extension and tweaks
     # -------------------------
     sudo apt install gnome-clocks
     sudo apt install gnome-tweaks

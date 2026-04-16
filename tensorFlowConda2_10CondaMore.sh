@@ -28,7 +28,7 @@ installEnvironment(){
     # Name of the conda environment
     # and Python version
     # ------------------------
-    ENV_NAME="tensorflow2.10.0"
+    ENV_NAME="tensorflow2.10.0Conda"
     PYTHON_VERSION="3.10.12"
     CUDATOOLKIT_VERSION="11.2.0"
     CUDNN_VERSION="8.1.0.77"
@@ -73,27 +73,33 @@ installEnvironment(){
     # ------------------------
     # Assign the version of numpy
     # and pandas to avoid problems
-    pip install numpy==1.21.6
-    pip install pandas==1.5.2
-
-    pip install matplotlib==3.5.3
-    pip install joblib==1.4.2
-    pip install tables==3.8.0 --no-deps
-    pip install py-cpuinfo==6.0.0 Cython==0.29.26 blosc2==2.0.0 numexpr==2.8.0 
+    conda install -c conda-forge \
+                    numpy=1.21.6 \
+                    pandas=1.5.2 \
+                    matplotlib==3.5.3 \
+                    scipy=1.7.2 \
+                    scikit-learn=1.0.2 \
+                    numba=0.55.* \
+                    pytables=3.8.* \
+                    numexpr=2.8.* \
+                    cython=0.29.26
     
-    
-    pip install scipy==1.7.2
-    pip install wheel==0.37.1
-    pip install scikit-learn==1.0.2
-    pip install prettytable==2.2.0
-    pip install plotly==5.2.1
-    pip install nbformat==5.1.3
-    pip install tqdm==4.61.2
-    pip install numba==0.55.0
-    # pip install pacmap==0.7.0
-    pip install openpyxl==3.0.7
+    # conda install -c conda-forge "matplotlib==3.5.3"
+    # conda install -c conda-forge \
+    #                 matplotlib<3.6 \
+    #                 matplotlib-inline<0.2 \
+    #                 nbformat=5.1.3
 
-    # conda install -y -c conda-forge "matplotlib>=3.5.2" matplotlib-inline
+    pip install blosc2==2.0.0
+    pip install \
+                joblib==1.4.2 \
+                py-cpuinfo==6.0.0 \
+                prettytable==2.2.0 \
+                plotly==5.2.1 \
+                tqdm==4.61.2 \
+                openpyxl==3.0.7 \
+                wheel==0.37.1
+
     # ------------------------
     # Install cudatoolkit and 
     # cudnn
@@ -122,11 +128,11 @@ installEnvironment(){
     pip install keras==$KERAS_VERSION || error_exit "Failed to install keras"
 
     
-    pip install tensorboard==2.10.1
+    # pip install tensorboard==2.10.1
     # ------------------------
     # Install other packages
     # ------------------------
-    
+    # conda install -c conda-forge "matplotlib==3.5.3"
 
     # conda install -y conda-forge::matplotlib
     # conda install -y anaconda::pandas
